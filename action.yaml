@@ -1,0 +1,23 @@
+
+name: Unit tests
+
+on:
+  workflow_call:
+    inputs:
+      serviceType:
+        required: true
+        type: string
+      testPath:
+        required: true
+        type: string
+
+jobs:
+
+  golang:
+    name: Run golang unit tests
+    runs-on: self-hosted
+    steps:
+      - uses: actions/setup-go@v3
+        with:
+          go-version: '1.18.5'
+        run: cd ${{ inputs.testPath }} && go test ./...
